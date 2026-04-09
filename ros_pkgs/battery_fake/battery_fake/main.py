@@ -5,6 +5,10 @@ from std_msgs.msg import String
 class FakeBatteryNode(Node):
     def __init__(self):
         super().__init__('battery_fake')
+        
+        self.declare_parameter('battery_level', 1.0)
+        self.battery_level = self.get_parameter('battery_level').value
+
         self.publisher_ = self.create_publisher(
             String, 
             '/inorbit/custom_data', 
@@ -15,7 +19,6 @@ class FakeBatteryNode(Node):
         self.timer_battery = self.create_timer(timer_period, self.timer_callback)
         self.timer_map_label = self.create_timer(timer_period, self.map_label_callback)
         
-        self.battery_level = 1.0  
         self.map_label = "L1"
 
     def timer_callback(self):

@@ -3,6 +3,7 @@
   <arg name="use_sim_time" default="false"/>
   <arg name="id" default="1" />
   <arg name="rviz" default="True" />
+  <arg name="battery_level" default="1.0" />
 
   <include file="$(find-pkg-share andino_fleet)/launch/spawn_multiple_robot.launch.py">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -10,6 +11,8 @@
     <arg name="rviz" value="$(var rviz)"/>
   </include>
 
-  <node pkg="battery_fake" exec="battery_fake" output="screen" />
+  <node pkg="battery_fake" exec="battery_fake" output="screen">  
+    <param name="battery_level" value="$(var battery_level)" />
+  </node>
 
   </launch>
